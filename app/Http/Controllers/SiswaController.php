@@ -147,14 +147,14 @@ class SiswaController extends Controller
             $rombel = Rombongan_belajar::where('nama', $pd['kelas'])->where('semester_id', semester_id())->first();
             if($rombel){
                 $photo = NULL;
-                if (Storage::disk('public')->exists('profile-photos/'.$pd['uuid'].'.jpg')) {
-                    $photo = 'profile-photos/'.$pd['uuid'].'.jpg';
+                if (Storage::disk('public')->exists('profile-photos/'.$pd['uuid'].'.JPG')) {
+                    $photo = 'profile-photos/'.$pd['uuid'].'.JPG';
                 }
-                if (Storage::disk('public')->exists('profile-photos/'.$pd['uuid'].'.png')) {
-                    $photo = 'profile-photos/'.$pd['uuid'].'.png';
+                if (Storage::disk('public')->exists('profile-photos/'.$pd['uuid'].'.PNG')) {
+                    $photo = 'profile-photos/'.$pd['uuid'].'.PNG';
                 }
-                if (Storage::disk('public')->exists('profile-photos/'.$pd['uuid'].'.jpeg')) {
-                    $photo = 'profile-photos/'.$pd['uuid'].'.jpeg';
+                if (Storage::disk('public')->exists('profile-photos/'.$pd['uuid'].'.JPEG')) {
+                    $photo = 'profile-photos/'.$pd['uuid'].'.JPEG';
                 }
                 $foto[] = $photo;
                 $insert++;
