@@ -1,0 +1,17 @@
+/*================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+/*
+.navigation {
+    font-size: 1rem;
+}
+html {
+    font-size: 0.9rem;
+}
+*/
+.header-navbar .navbar-container ul.navbar-nav li.dropdown-user .dropdown-menu {
+    width: 230px;
+}

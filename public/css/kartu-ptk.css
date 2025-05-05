@@ -1,0 +1,54 @@
+body {
+  background-image: url('images/nametag-ptk.png');
+  background-position: left;
+  background-repeat: no-repeat;
+  background-image-resize: 4;
+}
+
+div.rounded {
+  border: 1px solid #0C2B60ff;
+  background-color: #0C2B60ff;
+  border-radius: 4em;
+  background-clip: border-box;
+  overflow: hidden;
+  position: absolute;
+  bottom: 88px;
+  right: 14px;
+  height: 50px;
+  width: 50px;
+  float: right;
+  background-size: 100%;
+}
+
+div.qrcode {
+  position: absolute;
+  top: 75px;
+  left: 25px;
+  background-color: #fff;
+  padding: 5px;
+}
+
+div.kotak {
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  bottom: 35px;
+  right: 17px;
+}
+
+div.nama, div.nisn, div.kelas {
+  text-align: right;
+  float: right;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+div.panjang{font-size: 8px;}
+div.nisn {
+  font-size: 8px;
+  margin-right: 17px;
+}
+
+div.kelas {
+  margin-top: -1px;
+  margin-right: 17px;
+  font-size: 6px;
+}

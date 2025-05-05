@@ -1,0 +1,72 @@
+body {
+  background-image: url('images/kartu-pelajar.jpg');
+  background-position: left;
+  background-repeat: no-repeat;
+  background-image-resize: 4;
+}
+
+div.rounded {
+  border: 2px solid #145e9f;
+  background-color: #145e9f;
+  background-clip: border-box;
+  overflow: hidden;
+  position: absolute;
+  bottom: 55px;
+  left: 20.4px;
+  height: 68px;
+  width: 68px;
+  float: right;
+  background-size: 100%;
+}
+
+div.qrcode {
+  position: absolute;
+  top: 75px;
+  left: 25px;
+  background-color: #fff;
+  padding: 5px;
+}
+
+div.kotak {
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  bottom: 50px;
+  left: 97px;
+  color: #04486b;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+div.nisn {
+  position: absolute;
+  left: 18px;
+  bottom: 35px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 9px;
+  color: #fff;
+}
+div.kotak_jurusan {
+  position: absolute;
+  height: 20px;
+  width: 100%;
+  bottom: 10px;
+  right: 65px;
+  color: #04486b;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 6px;
+}
+div.jurusan {
+  text-align: right;
+  float: right;
+}
+/*div.nama, div.nisn, div.kelas {
+  text-align: right;
+  float: right;
+  
+}*/
+div.panjang{font-size: 8px;}
+
+div.kelas {
+  margin-top: -1px;
+  margin-right: 17px;
+  font-size: 6px;
+}

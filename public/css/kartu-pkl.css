@@ -1,0 +1,56 @@
+body {
+  background-image: url('images/kartu-pkl.jpg');
+  background-position: left;
+  background-repeat: no-repeat;
+  background-image-resize: 4;
+}
+
+div.rounded {
+  border: 1px solid #ffd05a;
+  background-color: #ffd05a;
+  border-radius: 5em;
+  background-clip: border-box;
+  overflow: hidden;
+  position: absolute;
+  top: 83px;
+  left: 58px;
+  height: 86px;
+  width: 86px;
+  float: right;
+  background-size: 100%;
+}
+
+div.qrcode {
+  position: absolute;
+  top: 75px;
+  left: 25px;
+  background-color: #fff;
+  padding: 5px;
+}
+
+div.kotak {
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  bottom: 55px;
+  left: 0px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+div.nama, div.nisn, div.kelas {
+  text-align: center;
+}
+div.panjang{font-size: 8px;}
+div.nama {
+   color: #003060;
+}
+div.nisn, div.kelas {
+  margin-top: 10px;
+  font-size: 7px;
+  color:#fff;
+}
+
+div.kelas {
+  margin-top: -1px;
+  font-size: 4px;
+}
