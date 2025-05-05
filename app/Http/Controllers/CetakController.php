@@ -189,7 +189,7 @@ class CetakController extends Controller
         $asal = request()->route('asal');
         $id = request()->route('id');
         $data = [
-            'item' => ($asal == 'ptk') ? Ptk::select('ptk_id', 'nuptk', 'nama', 'photo')->find($id) : Peserta_didik::select('peserta_didik_id', 'nisn', 'nama', 'photo')->with(['kelas' => function($query){
+            'item' => ($asal == 'ptk') ? Ptk::select('ptk_id', 'nuptk', 'nama', 'photo')->find($id) : Peserta_didik::select('peserta_didik_id', 'nisn', 'nama', 'photo', 'tempat_lahir', 'tanggal_lahir')->with(['kelas' => function($query){
                 $query->where('rombongan_belajar.semester_id', semester_id());
             }])->find($id),
             'qrcode' => base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($id??'string')),
@@ -208,6 +208,10 @@ class CetakController extends Controller
             'margin_bottom' => 0,
             'format'        => [54, 85.6],
         ]);
+        $pdf->getMpdf()->AddPage('P','','1','','',10,10,10,10,5,5,'', [54, 85.6]);
+        //$pdf->getMpdf()->AddPage('P');
+		$rapor_cover= view('cetak.qrcode-'.$asal, $data);
+		$pdf->getMpdf()->WriteHTML($rapor_cover);
         $pdf->showImageErrors = true;
         return $pdf->stream(clean($nama).'.pdf');
     }

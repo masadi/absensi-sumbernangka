@@ -1,7 +1,7 @@
 <template>
   <b-navbar-nav class="nav">
     <b-nav-item>
-      <h2>{{sekolah}} | {{semester}}</h2>
+      <h2 v-html="`${sekolah} | ${semester}`"></h2>
     </b-nav-item>
   </b-navbar-nav>
 </template>

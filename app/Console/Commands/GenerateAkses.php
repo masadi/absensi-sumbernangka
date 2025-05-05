@@ -72,17 +72,18 @@ class GenerateAkses extends Command
         Permission::truncate();
         foreach($abilities as $ab){
             $r = Role::where('name', $ab['role'])->first();
-            foreach($ab['akses'] as $perm){
-                $permission = Permission::updateOrCreate([
-                    'name' => $perm,
-                    'display_name' => $perm,
-                    'description' => 'read',
-                ]);
-                if(!$r->hasPermission($permission->name)){
-                    $r->attachPermission($permission);
+            if($r){
+                foreach($ab['akses'] as $perm){
+                    $permission = Permission::updateOrCreate([
+                        'name' => $perm,
+                        'display_name' => $perm,
+                        'description' => 'read',
+                    ]);
+                    if(!$r->hasPermission($permission->name)){
+                        $r->attachPermission($permission);
+                    }
                 }
             }
-            
         }
         $users = User::whereNotNull('ptk_id')->orWhereNotNull('peserta_didik_id')->get();
         $all_role = ["administrator", "ptk", "staf", "pd", "walas"];

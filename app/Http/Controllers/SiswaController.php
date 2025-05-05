@@ -160,7 +160,8 @@ class SiswaController extends Controller
                 $insert++;
                 $tanggal_lahir = NULL;
                 try {
-                    $tanggal_lahir = Carbon::parse($pd['tanggal_lahir'])->format('Y-m-d');
+                    $tgl_lahir = str_replace("'", "", $pd['tanggal_lahir']);
+                    $tanggal_lahir = Carbon::parse($tgl_lahir)->format('Y-m-d');
                 } catch (\Throwable $th) {
                    dd($th->getMessage());
                 }
@@ -202,7 +203,7 @@ class SiswaController extends Controller
                 
             }
         }
-        Storage::deleteDirectory($directory);
+        Storage::disk('public')->deleteDirectory($directory);
         $data = [
             'result' => $multiplied->all(),
             'icon' => ($insert) ? 'success' : 'error',

@@ -6,24 +6,24 @@ body {
 }
 
 div.rounded {
-  border: 1px solid #0C2B60ff;
-  background-color: #0C2B60ff;
-  border-radius: 4em;
+  border: 3px solid red;
+  background-color: red;
+  border-radius: 1em;
   background-clip: border-box;
   overflow: hidden;
   position: absolute;
-  bottom: 88px;
-  right: 14px;
-  height: 50px;
-  width: 50px;
+  top: 104px;/*104*/
+  left: 64px;
+  height: 95px;
+  width: 70px;
   float: right;
   background-size: 100%;
 }
 
 div.qrcode {
   position: absolute;
-  top: 75px;
-  left: 25px;
+  top: 103px;
+  left: 35px;
   background-color: #fff;
   padding: 5px;
 }
@@ -32,13 +32,13 @@ div.kotak {
   position: absolute;
   height: 50px;
   width: 100%;
-  bottom: 35px;
-  right: 17px;
+  left: 35px;
+  top: 210px;
 }
 
 div.nama, div.nisn, div.kelas {
-  text-align: right;
-  float: right;
+  text-align: left;
+  /*float: right;*/
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 div.panjang{font-size: 8px;}

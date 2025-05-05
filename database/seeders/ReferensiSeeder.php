@@ -32,7 +32,7 @@ class ReferensiSeeder extends Seeder
         User::whereNotNull('email')->delete();
         $user = User::create([
             'name' => 'Administrator',
-            'email' => 'admin@smpalfalahsg.sch.id',
+            'email' => 'admin@smksumbernangka.sch.id',
             'password' => bcrypt('12345678'),
         ]);
         $semester = [
@@ -92,7 +92,7 @@ class ReferensiSeeder extends Seeder
                 ]
             );
         }
-        $npsn = ['20527178'];
+        $npsn = ['70009413'];
         $teams = Team::all();
         $semester = Semester::where('periode_aktif', 1)->first();
         foreach($npsn as $n){
