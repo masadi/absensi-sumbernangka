@@ -7,5 +7,4 @@
     <div class="nisn"><strong>{{$item->nisn}}</strong></div>
     <div class="kelas"><strong>{{$item->kelas?->nama_jurusan}}</strong></div>
 </div>
-{{dd($item)}}
 @endsection
