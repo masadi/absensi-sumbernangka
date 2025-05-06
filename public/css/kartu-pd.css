@@ -1,6 +1,6 @@
 body {
   background-image: url('images/depan.jpg');
-  background-position: left;
+  background-position: top;
   background-repeat: no-repeat;
   background-image-resize: 4;
 }
@@ -41,7 +41,7 @@ div.nama, div.nisn, div.kelas {
   /*float: right;*/
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-div.panjang{font-size: 8px;}
+div.panjang{font-size: 9px;}
 div.nisn {
   font-size: 7px;
   margin-right: 17px;
