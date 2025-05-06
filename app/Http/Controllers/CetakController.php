@@ -208,10 +208,6 @@ class CetakController extends Controller
             'margin_bottom' => 0,
             'format'        => [54, 85.6],
         ]);
-        $pdf->getMpdf()->AddPage('P','','1','','',10,10,10,10,5,5,'', [54, 85.6]);
-        //$pdf->getMpdf()->AddPage('P');
-		$rapor_cover= view('cetak.qrcode-'.$asal, $data);
-		$pdf->getMpdf()->WriteHTML($rapor_cover);
         $pdf->showImageErrors = true;
         return $pdf->stream(clean($nama).'.pdf');
     }

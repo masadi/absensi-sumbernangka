@@ -1,5 +1,5 @@
 body {
-  background-image: url('images/nametag-pd.jpg');
+  background-image: url('images/depan.jpg');
   background-position: left;
   background-repeat: no-repeat;
   background-image-resize: 4;
@@ -22,8 +22,8 @@ div.rounded {
 
 div.qrcode {
   position: absolute;
-  top: 103px;
-  left: 35px;
+  bottom: 10px;
+  left: 10px;
   background-color: #fff;
   padding: 5px;
 }

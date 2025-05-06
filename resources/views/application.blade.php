@@ -8,7 +8,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- <link rel="icon" href="<%= BASE_URL %>favicon.ico"> -->
 
-  <title>{{config('app.name')}}</title>
+  <title>{!! config('app.name') !!}</title>
 
   <!-- Splash Screen/Loader Styles -->
   <link rel="stylesheet" type="text/css" href="{{ asset(mix('css/loader.css')) }}" />
