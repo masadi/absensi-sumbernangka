@@ -189,7 +189,11 @@ class CetakController extends Controller
         $asal = request()->route('asal');
         $id = request()->route('id');
         $data = [
-            'item' => ($asal == 'ptk') ? Ptk::select('ptk_id', 'nuptk', 'nama', 'photo')->find($id) : Peserta_didik::select('peserta_didik_id', 'nisn', 'nama', 'photo', 'tempat_lahir', 'tanggal_lahir')->with(['kelas' => function($query){
+            'item' => ($asal == 'ptk') ? Ptk::select('ptk_id', 'nuptk', 'nama', 'photo', 'sekolah_id')->with(['sekolah' => function($query){
+                $query->select('sekolah_id', 'bentuk_pendidikan_id');
+            }])->find($id) : Peserta_didik::select('peserta_didik_id', 'nisn', 'nama', 'photo', 'tempat_lahir', 'tanggal_lahir', 'sekolah_id')->with(['sekolah' => function($query){
+                $query->select('sekolah_id', 'bentuk_pendidikan_id');
+            }, 'kelas' => function($query){
                 $query->where('rombongan_belajar.semester_id', semester_id());
             }])->find($id),
             'qrcode' => base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($id??'string')),
@@ -199,8 +203,12 @@ class CetakController extends Controller
         } else {
             $nama = $data['item']->nama.'-'.$data['item']->kelas?->nama;
         }
+        $jenjang = 'smp';
+        if($data['item']->sekolah->bentuk_pendidikan_id == 15){
+            $jenjang = 'smk';
+        }
         //return view('cetak.kartu-'.$asal, $data);
-        $pdf = PDF::loadView('cetak.kartu-'.$asal, $data, [], [
+        $pdf = PDF::loadView('cetak.kartu-'.$asal.'-'.$jenjang, $data, [], [
             'default_font_size' => '8',
             'margin_left' => 0,
             'margin_right' => 0,
