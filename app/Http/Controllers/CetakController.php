@@ -207,7 +207,7 @@ class CetakController extends Controller
         if($asal == 'ptk'){
             $collection = Ptk::select('ptk_id', 'nuptk', 'nama', 'photo')->where('sekolah_id', request()->route('sekolah_id'))->orderBy('nama')->paginate(10);
         } else {
-            $collection = Peserta_didik::select('peserta_didik_id', 'nisn', 'nama', 'photo')->whereNotNull('photo')->where('sekolah_id', request()->route('sekolah_id'))->orderBy('nama')->paginate(10);
+            $collection = Peserta_didik::select('peserta_didik_id', 'nisn', 'nama', 'photo', 'tempat_lahir', 'tanggal_lahir')->whereNotNull('photo')->where('sekolah_id', request()->route('sekolah_id'))->orderBy('nama')->paginate(10);
         }
         foreach($collection as $key => $item){
             if($key > 0){
