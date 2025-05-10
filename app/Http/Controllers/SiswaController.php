@@ -160,11 +160,17 @@ class SiswaController extends Controller
                 $insert++;
                 $tanggal_lahir = NULL;
                 try {
+                    $tanggal_lahir = Carbon::parse($pd['tanggal_lahir'])->format('Y-m-d');
+                } catch (\Throwable $e) {
+                    $tgl_lahir = str_replace("'", "", $pd['tanggal_lahir']);
+                    $tanggal_lahir = Carbon::parse($tgl_lahir)->format('Y-m-d');
+                }
+                /*try {
                     $tgl_lahir = str_replace("'", "", $pd['tanggal_lahir']);
                     $tanggal_lahir = Carbon::parse($tgl_lahir)->format('Y-m-d');
                 } catch (\Throwable $th) {
                    dd($th->getMessage());
-                }
+                }*/
                 $peserta_didik = Peserta_didik::updateOrCreate(
                     [
                         'peserta_didik_id' => $pd['uuid']
