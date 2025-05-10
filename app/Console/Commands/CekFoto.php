@@ -33,10 +33,11 @@ class CekFoto extends Command
         })->get();
         foreach($data as $d){
             $this->info($d->nama.':');
+            $i=1;
             foreach($d->pd as $pd){
-                dd($pd);
+                $this->info($i.'. '.$pd->nama);
+                $i++;
             }
-            dd($d->nama);
         }
         return Command::SUCCESS;
     }

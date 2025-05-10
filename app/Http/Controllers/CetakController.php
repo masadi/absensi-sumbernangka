@@ -185,6 +185,50 @@ class CetakController extends Controller
         ->download('rekapitulasi-presensi-'.Carbon::now()
         ->translatedFormat('d-F-Y').'.xlsx');
     }
+    public function semua_qrcode(){
+        $asal = request()->route('asal');
+        $data = [];
+        $pdf = PDF::loadView('cetak.blank', $data, [], [
+            'default_font_size' => '8',
+            'margin_left' => 0,
+            'margin_right' => 0,
+            'margin_top' => 0,
+            'margin_bottom' => 0,
+            'format'        => [54, 85.6],
+        ]);
+        //'format'        => [54, 85.6],
+        //'format'        => [54, 76],
+        $sekolah = Sekolah::find(request()->route('sekolah_id'));
+        //dd($sekolah->bentuk_pendidikan_id);
+        $jenjang = 'smp';
+        if($sekolah->bentuk_pendidikan_id == 15){
+            $jenjang = 'smk';
+        }
+        if($asal == 'ptk'){
+            $collection = Ptk::select('ptk_id', 'nuptk', 'nama', 'photo')->where('sekolah_id', request()->route('sekolah_id'))->orderBy('nama')->paginate(10);
+        } else {
+            $collection = Peserta_didik::select('peserta_didik_id', 'nisn', 'nama', 'photo')->whereNotNull('photo')->where('sekolah_id', request()->route('sekolah_id'))->orderBy('nama')->paginate(10);
+        }
+        foreach($collection as $key => $item){
+            if($key > 0){
+                $pdf->getMpdf()->WriteHTML('<pagebreak />');
+            }
+            if($asal == 'ptk'){
+                $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($item->ptk_id));
+            } else {
+                $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($item->peserta_didik_id));
+            }
+            $params = [
+                'item' => $item,
+                'qrcode' => $qrcode,
+                'bentuk_pendidikan_id' => $sekolah->bentuk_pendidikan_id,
+            ];
+            $html = view('cetak.kartu-'.$asal.'-'.$jenjang, $params);
+			$pdf->getMpdf()->WriteHTML($html);
+        }
+        return $pdf->stream('qrcode-pd.pdf');
+    }
+    
     public function id_card(){
         $asal = request()->route('asal');
         $id = request()->route('id');
@@ -197,6 +241,7 @@ class CetakController extends Controller
                 $query->where('rombongan_belajar.semester_id', semester_id());
             }])->find($id),
             'qrcode' => base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($id??'string')),
+            'bentuk_pendidikan_id' => NULL,
         ];
         if($asal == 'ptk'){
             $nama = $data['item']->nama;
@@ -207,7 +252,6 @@ class CetakController extends Controller
         if($data['item']->sekolah->bentuk_pendidikan_id == 15){
             $jenjang = 'smk';
         }
-        //return view('cetak.kartu-'.$asal, $data);
         $pdf = PDF::loadView('cetak.kartu-'.$asal.'-'.$jenjang, $data, [], [
             'default_font_size' => '8',
             'margin_left' => 0,
@@ -342,36 +386,6 @@ class CetakController extends Controller
 			$pdf->getMpdf()->WriteHTML($html);
         }
         return $pdf->stream('kartu-pkl-anggota-rombel.pdf');
-    }
-    public function semua_qrcode(){
-        $asal = request()->route('asal');
-        $data = [];
-        $pdf = PDF::loadView('cetak.blank', $data, [], [
-            'default_font_size' => '8',
-            'margin_left' => 0,
-            'margin_right' => 0,
-            'margin_top' => 0,
-            'margin_bottom' => 0,
-            'format'        => [54, 85.6],
-        ]);
-        //'format'        => [54, 85.6],
-        //'format'        => [54, 76],
-        if($asal == 'ptk'){
-            $collection = Ptk::select('ptk_id', 'nuptk', 'nama', 'photo')->where('sekolah_id', request()->route('sekolah_id'))->orderBy('nama')->paginate(10);
-        } else {
-            $collection = Peserta_didik::select('peserta_didik_id', 'nisn', 'nama', 'photo')->whereNotNull('photo')->where('sekolah_id', request()->route('sekolah_id'))->orderBy('nama')->paginate(10);
-        }
-        foreach($collection as $key => $item){
-            if($key > 0){
-                $pdf->getMpdf()->WriteHTML('<pagebreak />');
-            }
-            $params = [
-                'item' => $item,
-            ];
-            $html = view('cetak.kartu-'.$asal, $params);
-			$pdf->getMpdf()->WriteHTML($html);
-        }
-        return $pdf->stream('qrcode-pd.pdf');
     }
     public function tanggal_cetak(){
         return Carbon::now()->translatedFormat('d F Y');
