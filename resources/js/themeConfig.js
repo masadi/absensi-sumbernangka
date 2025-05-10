@@ -10,6 +10,7 @@ export const $themeBreakpoints = {}
 export const $themeConfig = {
   app: {
     appName: app_name, // Will update name in navigation menu (Branding)
+    appBrand: app_brand, // Will update name in navigation menu (Branding)
     scanUrl: scan_url,
     // eslint-disable-next-line global-require
     appLogoImage: '/img/logo/logo.svg',

@@ -31,7 +31,7 @@
                 />
               </span>
               <h2 class="brand-text">
-                {{ appName }}
+                {{ appBrand }}
               </h2>
             </b-link>
           </li>
@@ -133,7 +133,7 @@ export default {
 
     const collapseTogglerIconFeather = computed(() => (collapseTogglerIcon.value === 'unpinned' ? 'CircleIcon' : 'DiscIcon'))
     // App Name
-    const { appName, appLogoImage } = $themeConfig.app
+    const { appBrand, appLogoImage } = $themeConfig.app
 
     return {
       perfectScrollbarSettings,
@@ -151,7 +151,7 @@ export default {
       skin,
 
       // App Name
-      appName,
+      appBrand,
       appLogoImage,
     }
   },

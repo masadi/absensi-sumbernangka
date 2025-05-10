@@ -2,7 +2,7 @@
   <p class="clearfix mb-0">
     <span class="float-md-left d-block d-md-inline-block mt-25">
       Hak Cipta &copy {{ new Date().getFullYear() }}
-      <b-link class="ml-25" href="https://smpalfalahsg.sch.id/" target="_blank">SMP AL-FALAH SUMBER GAYAM</b-link>,
+      <b-link class="ml-25" href="https://smksumbernangka.sch.id/" target="_blank">{{ appBrand }}</b-link>,
       <span class="d-none d-sm-inline-block"> All rights Reserved</span>
     </span>
 
@@ -19,5 +19,10 @@ export default {
   components: {
     BLink,
   },
+  computed: {
+    appBrand(){
+      return app_brand;
+    }
+  }
 }
 </script>

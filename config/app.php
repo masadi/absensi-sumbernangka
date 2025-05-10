@@ -16,6 +16,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'ABSEN'),
+    'brand' => env('APP_BRAND', 'PRESENSI'),
     'version' => env('APP_VERSION', '2.0.0'),
     'registration' => env('REGISTRATION', FALSE),
 

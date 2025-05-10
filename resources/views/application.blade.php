@@ -46,6 +46,7 @@
     var app_url = '{{ config('app.url') }}';
     var scan_url = '{{ config('app.scan_url')}}';
     var app_name = '{{ config('app.name') }}';
+    var app_brand = '{{ config('app.brand') }}';
   </script>   
   <script src="{{ asset(mix('js/app.js')) }}"></script>
 

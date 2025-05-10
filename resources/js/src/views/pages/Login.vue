@@ -5,9 +5,7 @@
       <!-- Brand logo-->
       <b-link class="brand-logo">
         <vuexy-logo />
-        <h2 class="brand-text text-primary ml-1">
-          {{appName}}
-        </h2>
+        <h2 class="brand-text text-primary ml-1" v-html="appName"></h2>
       </b-link>
       <!-- /Brand logo-->
 
@@ -22,9 +20,7 @@
       <!-- Login-->
       <b-col lg="4" class="d-flex align-items-center auth-bg px-2 p-lg-5">
         <b-col sm="8" md="6" lg="12" class="px-xl-2 mx-auto">
-          <b-card-title class="mb-1 font-weight-bold" title-tag="h2">
-            Welcome to {{appName}}
-          </b-card-title>
+          <b-card-title class="mb-1 font-weight-bold" title-tag="h2" v-html="`Welcome to ${appBrand}`"></b-card-title>
           <b-card-text class="mb-2">
             Silahkan Login dengan Akun Anda!
           </b-card-text>
@@ -160,7 +156,10 @@ export default {
     },
     appName(){
       return app_name;
-    }
+    },
+    appBrand(){
+      return app_brand;
+    },
   },
   created() {
     this.setFocus();
