@@ -10,5 +10,4 @@
     <div class="qrcode">
         <img src="data:image/svg+xml;base64, {!! $qrcode !!}" width="50">
     </div>
-{{dd($item)}}
 @endsection
