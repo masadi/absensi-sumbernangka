@@ -194,7 +194,7 @@ class CetakController extends Controller
             'margin_right' => 0,
             'margin_top' => 0,
             'margin_bottom' => 0,
-            'format'        => [54, 85.6],
+            'format'        => [54, 85.1],
         ]);
         //'format'        => [54, 85.6],
         //'format'        => [54, 76],
