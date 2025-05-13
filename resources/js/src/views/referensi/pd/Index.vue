@@ -6,7 +6,7 @@
         <strong>Loading...</strong>
       </div>
       <div v-else>
-        <datatable :loading="loading" :isBusy="isBusy" :items="items" :fields="fields" :meta="meta" @per_page="handlePerPage" @pagination="handlePagination" @search="handleSearch" @sort="handleSort" @sekolah="handleSekolah" @aksi="handleAksi" />
+        <datatable :loading="loading" :isBusy="isBusy" :items="items" :fields="fields" :meta="meta" @per_page="handlePerPage" @pagination="handlePagination" @search="handleSearch" @sort="handleSort" @sekolah="handleSekolah" @rombel="handleRombel" @aksi="handleAksi" />
       </div>
     </b-card-body>
     <add-siswa @reload="handleReload"></add-siswa>
@@ -100,7 +100,7 @@ export default {
         {
           key: 'kelas',
           label: 'Kelas',
-          sortable: true,
+          sortable: false,
           thClass: 'text-center',
           tdClass: 'text-center',
         },
@@ -120,7 +120,9 @@ export default {
       sortBy: 'nama', //DEFAULT SORTNYA ADALAH CREATED_AT
       sortByDesc: false, //ASCEDING
       sekolah_id: '',
+      rombongan_belajar_id: '',
       data_sekolah: [],
+      data_rombel: [],
       loading: false,
     }
   },
@@ -146,6 +148,7 @@ export default {
       this.$http.get('/referensi/pd', {
         params: {
           sekolah_id: this.sekolah_id,
+          rombongan_belajar_id: this.rombongan_belajar_id,
           semester_id: this.user.semester.semester_id,
           periode_aktif: this.user.semester.nama,
           page: current_page,
@@ -160,6 +163,7 @@ export default {
         this.isBusy = false
         this.items = getData.data
         this.data_sekolah = response.data.data_sekolah
+        this.data_rombel = response.data.data_rombel
         this.meta = {
           total: getData.total,
           current_page: getData.current_page,
@@ -168,7 +172,9 @@ export default {
           to: getData.to,
           search: this.search,
           sekolah_id: this.sekolah_id,
+          rombongan_belajar_id: this.rombongan_belajar_id,
           data_sekolah: this.data_sekolah,
+          data_rombel: this.data_rombel,
         }
       })
     },
@@ -198,6 +204,11 @@ export default {
     handleSekolah(val){
       this.loading = true
       this.sekolah_id = val
+      this.loadPostsData()
+    },
+    handleRombel(val){
+      this.loading = true
+      this.rombongan_belajar_id = val
       this.loadPostsData()
     },
     handleAksi(val){

@@ -1,13 +1,16 @@
 <template>
   <div>
     <b-row class="d-flex justify-content-between">
-      <b-col md="4" class="mb-2">
+      <b-col md="3" class="mb-2">
         <v-select v-model="meta.per_page" :options="[10, 25, 50, 100]" @input="loadPerPage" :clearable="false" :searchable="false"></v-select>
       </b-col>
-      <b-col md="4" v-if="meta.data_sekolah.length">
+      <b-col md="3" v-if="meta.data_sekolah.length">
         <v-select v-model="meta.sekolah_id" :reduce="nama => nama.sekolah_id" label="nama" :options="meta.data_sekolah" placeholder="== Filter Unit ==" @input="changeSekolah"></v-select>
       </b-col>
-      <b-col md="4">
+      <b-col md="3" v-if="meta.data_sekolah.length">
+        <v-select v-model="meta.rombongan_belajar_id" :reduce="nama => nama.rombongan_belajar_id" label="nama" :options="meta.data_rombel" placeholder="== Filter Rombel ==" @input="changeRombel"></v-select>
+      </b-col>
+      <b-col md="3">
         <b-form-input v-model="meta.search" @input="search" placeholder="Cari data..."></b-form-input>
       </b-col>
     </b-row>
@@ -130,6 +133,9 @@ export default {
     },
     changeSekolah(val){
       this.$emit('sekolah', this.meta.sekolah_id)
+    },
+    changeRombel(){
+      this.$emit('rombel', this.meta.rombongan_belajar_id)
     },
     changePage(val) {
       this.$emit('pagination', val)

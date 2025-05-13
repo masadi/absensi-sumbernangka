@@ -18,9 +18,16 @@ class SiswaController extends Controller
 {
     public function index(){
         $data_sekolah = [];
+        $data_rombel = [];
         $user = auth()->user();
         if($user->hasRole('administrator', request()->periode_aktif)){
             $data_sekolah = Sekolah::select('sekolah_id', 'nama')->get();
+        }
+        if(request()->sekolah_id){
+            $data_rombel = Rombongan_belajar::where(function($query){
+                $query->where('sekolah_id', request()->sekolah_id);
+                $query->where('semester_id', request()->semester_id);
+            })->orderBy('tingkat_pendidikan_id')->orderBy('nama')->get();
         }
         $data = Peserta_didik::withWhereHas('kelas', function($query) use ($user){
             $query->where('rombongan_belajar.semester_id', request()->semester_id);
@@ -38,8 +45,12 @@ class SiswaController extends Controller
         })
         ->when(request()->sekolah_id, function($query) {
             $query->where('sekolah_id', request()->sekolah_id);
+        })->when(request()->rombongan_belajar_id, function($query) {
+            $query->whereHas('kelas', function($query){
+                $query->where('rombongan_belajar.rombongan_belajar_id', request()->rombongan_belajar_id);
+            });
         })->paginate(request()->per_page);
-        return response()->json(['status' => 'success', 'data' => $data, 'data_sekolah' => $data_sekolah]);
+        return response()->json(['status' => 'success', 'data' => $data, 'data_sekolah' => $data_sekolah, 'data_rombel' => $data_rombel]);
     }
     public function pindah_rombel(){
         request()->validate(
