@@ -247,13 +247,31 @@ class SiswaController extends Controller
         return response()->json($data);
     }
     public function update_siswa(){
+        request()->validate(
+            [
+                'foto' => 'required|mimes:jpg,jpeg,png',
+                'nama' => 'required',
+                'no_induk' => 'required',
+                'nisn' => 'required',
+            ],
+            [
+                'foto.required' => 'Foto tidak boleh kosong',
+                'foto.mimes' => 'Foto harus berupa file dengan tipe: jpg/jpeg/png.',
+                'nama.required' => 'Nama tidak boleh kosong',
+                'no_induk.required' => 'Nomor Induk tidak boleh kosong',
+                'nisn.required' => 'NISN tidak boleh kosong',
+            ]
+        );
         $find = Peserta_didik::find(request()->peserta_didik_id);
         if($find){
+            //$photo = 'profile-photos/'.$pd['uuid'].'.PNG';
+            $guessExtension = request()->file('foto')->guessExtension();
+            $file = request()->file('foto')->storeAs('profile-photos', request()->peserta_didik_id.'.'.$guessExtension, 'public');
             $find->nama = request()->nama;
-            $find->nik = request()->nik;
             $find->no_induk = request()->no_induk;
             $find->nisn = request()->nisn;
             $find->wa = gantiformat(request()->wa);
+            $find->photo = 'profile-photos/'.request()->peserta_didik_id.'.'.$guessExtension;
             if($find->save()){
                 $data = [
                     'icon' => 'success',

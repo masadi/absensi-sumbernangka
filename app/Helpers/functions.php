@@ -501,6 +501,9 @@ function reratajmlJawabanOpsi($soal_ujian, $items, $soal, $index){
     //return jmlJawabanOpsi(getAlphabet($i), $data->jadwal_ujian->soal_ujian, $soal, $index, $data->items);
 }
 function gantiformat($nomorhp) {
+    if(!$nomorhp){
+        return NULL;
+    }
     //Terlebih dahulu kita trim dl
     $nomorhp = trim($nomorhp);
    //bersihkan dari karakter yang tidak perlu
