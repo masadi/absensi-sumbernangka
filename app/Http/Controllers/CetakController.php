@@ -212,7 +212,7 @@ class CetakController extends Controller
                 if(request()->route('tingkat')){
                     $query->whereHas('kelas', function($query){
                         $query->where('tingkat_pendidikan_id', request()->route('tingkat'));
-                        $query->where('semester_id', semester_id());
+                        $query->where('rombongan_belajar.semester_id', semester_id());
                     });
                 }
             })->orderBy('nama')->paginate(10);
