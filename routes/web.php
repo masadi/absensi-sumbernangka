@@ -32,7 +32,7 @@ Route::prefix('cetak')->name('cetak.')->group( function(){
     Route::get('/keterlambatan/{jenis}/{start}/{end}', [CetakController::class, 'keterlambatan'])->name('keterlambatan');
     Route::get('/ketidakhadiran/{jenis}/{start}/{end}', [CetakController::class, 'ketidakhadiran'])->name('ketidakhadiran');
     Route::get('/pulang-cepat/{jenis}/{start}/{end}', [CetakController::class, 'pulang_cepat'])->name('pulang-cepat');
-    Route::get('/qrcode/{sekolah_id}/{asal}', [CetakController::class, 'semua_qrcode'])->name('semua-qrcode');
+    Route::get('/qrcode/{sekolah_id}/{asal}/{tingkat?}', [CetakController::class, 'semua_qrcode'])->name('semua-qrcode');
 });
 Route::prefix('unduhan')->name('unduhan.')->group( function(){
     Route::get('/pelanggaran/{sekolah_id}/{semester_id}/{start?}/{end?}', [UnduhanController::class, 'pelanggaran'])->name('pelanggaran');
